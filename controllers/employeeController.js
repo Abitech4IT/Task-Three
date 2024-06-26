@@ -4,7 +4,7 @@ exports.getAllEmployees = async (req, res, next) => {
   try {
     const employees = await employee.findAll();
 
-    if (!employee) {
+    if (!employees) {
       return res.status(404).json({
         success: false,
         message: "employees not found",
@@ -30,7 +30,7 @@ exports.getEmployee = async (req, res, next) => {
     if (!employeeData) {
       return res.status(404).json({
         success: false,
-        message: "invalid employee id",
+        message: "invalid employee",
       });
     }
 
@@ -95,12 +95,12 @@ exports.updateEmployee = async (req, res, next) => {
     if (mobile) updatedEmployee.mobile = mobile;
 
     // Check if the employee exists before updating
-    const employeeId = await employee.findOne({ where: { id: id } });
+    const isExist = await employee.findOne({ where: { id: id } });
 
-    if (!employeeId) {
+    if (!isExist) {
       return res.status(404).json({
         success: false,
-        message: "invalid employee id",
+        message: "invalid employee",
       });
     }
 
@@ -131,7 +131,7 @@ exports.deleteEmployee = async (req, res, next) => {
     if (!id) {
       return res.status(404).json({
         success: false,
-        message: "invalid employee id",
+        message: "invalid employee",
       });
     }
     await employee.destroy({
