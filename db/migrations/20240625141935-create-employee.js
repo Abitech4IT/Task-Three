@@ -1,13 +1,16 @@
 "use strict";
+// import { v4 as uuid } from "uuid";
+const { v4: uuid } = require("uuid");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("employee", {
       id: {
+        type: Sequelize.UUID,
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: uuid,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
       firstName: {
         type: Sequelize.STRING(20),

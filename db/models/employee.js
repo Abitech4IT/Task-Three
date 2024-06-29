@@ -1,5 +1,7 @@
 "use strict";
 const { Model, Sequelize } = require("sequelize");
+// import { v4 as uuid } from "uuid";
+const { v4: uuid } = require("uuid");
 
 const sequelize = require("../../config/database");
 
@@ -7,10 +9,10 @@ module.exports = sequelize.define(
   "employee",
   {
     id: {
+      type: Sequelize.UUID,
       allowNull: false,
-      autoIncrement: true,
+      defaultValue: uuid,
       primaryKey: true,
-      type: Sequelize.INTEGER,
     },
     firstName: {
       type: Sequelize.STRING(20),
